@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: back-office-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: conference-room-route
+          uri: ${CONFERENCE_ROOM_ROUTE_URI:http://localhost:9000}
+          predicates:
+            - Path=/conference-room
+          filters:
+            - PrefixPath=/api
+            - AddResponseHeader=X-Powered-By, Gateway Service
+            - AddRequestHeader=Content-Type, application/json
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+server:
+  port: 8080

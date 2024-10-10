@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: conference-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: conference-available-route
+          uri: ${CONFERENCE_AVAILABLE_ROUTE_URI:http://localhost:9000}
+          predicates:
+            - Method=POST
+            - Path=/conference/available
+          filters:
+            - PrefixPath=/api
+            - AddResponseHeader=X-Powered-By, Gateway Service
+            - AddRequestHeader=Content-Type, application/json
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+server:
+  port: 8081
