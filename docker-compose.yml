@@ -1,0 +1,31 @@
+version: '3'
+services:
+  conference-platform:
+    build: ./conference-platform
+    image: renvl/conference-platform
+    ports:
+      - 9000:9000
+    networks:
+      - my-network
+  back-office-gateway:
+    build: ./back-office-gateway
+    image: renvl/back-office-gateway
+    ports:
+      - 8080:8080
+    depends_on:
+      - conference-platform
+    networks:
+      - my-network
+  conference-gateway:
+    build: ./conference-gateway
+    image: renvl/conference-gateway
+    ports:
+      - 8081:8081
+    depends_on:
+      - conference-platform
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
