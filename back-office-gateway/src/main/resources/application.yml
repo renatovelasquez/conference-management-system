@@ -13,11 +13,25 @@ spring:
     gateway:
       routes:
         - id: conference-room-route
-          uri: http://localhost:8083
+          uri: http://conference-platform:8083
           predicates:
             - Path=/api/conference-room
           filters:
-            - AddResponseHeader=X-Powered-By, Gateway Service
+            - AddResponseHeader=X-Powered-By, Renato V.
+            - AddRequestHeader=Content-Type, application/json
+        - id: conference-route
+          uri: http://conference-platform:8083
+          predicates:
+            - Path=/api/conference/**
+          filters:
+            - AddResponseHeader=X-Powered-By, Renato V.
+            - AddRequestHeader=Content-Type, application/json
+        - id: conference-feedback-route
+          uri: http://conference-platform:8083
+          predicates:
+            - Path=/api/feedback/*
+          filters:
+            - AddResponseHeader=X-Powered-By, Renato V.
             - AddRequestHeader=Content-Type, application/json
 management:
   endpoints:

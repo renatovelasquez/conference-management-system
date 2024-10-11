@@ -3,6 +3,7 @@ services:
 
   back-office-gateway:
     image: renvl/back-office-gateway
+    container_name: tallink_back-office-gateway_1
     build:
       context: ./back-office-gateway
       dockerfile: Dockerfile
@@ -13,6 +14,7 @@ services:
 
   conference-gateway:
     image: renvl/conference-gateway
+    container_name: tallink_conference-gateway_1
     build:
       context: ./conference-gateway
       dockerfile: Dockerfile
@@ -23,6 +25,7 @@ services:
 
   conference-platform:
     image: renvl/conference-platform
+    container_name: tallink_conference-platform_1
     build:
       context: ./conference-platform
       dockerfile: Dockerfile
