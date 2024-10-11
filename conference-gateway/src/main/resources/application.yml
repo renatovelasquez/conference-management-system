@@ -1,6 +1,10 @@
 server:
   port: 8082
 
+logging:
+  level:
+    org.springframework.web: DEBUG
+
 spring:
   application:
     name: conference-gateway
@@ -9,12 +13,10 @@ spring:
     gateway:
       routes:
         - id: conference-available-route
-          uri: http://conference-platform:8083
+          uri: http://localhost:8083
           predicates:
-            - Method=POST
-            - Path=/conference/available
+            - Path=/api/conference/available
           filters:
-            - PrefixPath=/api
             - AddResponseHeader=X-Powered-By, Gateway Service
             - AddRequestHeader=Content-Type, application/json
 management:

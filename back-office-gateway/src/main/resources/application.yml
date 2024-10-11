@@ -1,6 +1,10 @@
 server:
   port: 8081
 
+logging:
+  level:
+    org.springframework.web: DEBUG
+
 spring:
   application:
     name: back-office-gateway
@@ -9,11 +13,10 @@ spring:
     gateway:
       routes:
         - id: conference-room-route
-          uri: http://conference-platform:8083
+          uri: http://localhost:8083
           predicates:
-            - Path=/conference-room
+            - Path=/api/conference-room
           filters:
-            - PrefixPath=/api
             - AddResponseHeader=X-Powered-By, Gateway Service
             - AddRequestHeader=Content-Type, application/json
 management:
