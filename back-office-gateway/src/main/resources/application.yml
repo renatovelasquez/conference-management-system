@@ -1,13 +1,15 @@
+server:
+  port: 8081
+
 spring:
-  main:
-    web-application-type: reactive
   application:
     name: back-office-gateway
+
   cloud:
     gateway:
       routes:
         - id: conference-room-route
-          uri: ${CONFERENCE_ROOM_ROUTE_URI:http://localhost:9000}
+          uri: http://conference-platform:8083
           predicates:
             - Path=/conference-room
           filters:
@@ -24,5 +26,3 @@ management:
       show-details: always
     gateway:
       enabled: true
-server:
-  port: 8080
